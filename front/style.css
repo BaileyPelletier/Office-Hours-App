@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700,900&display=swap');
+
+*::selection{
+    background: black;
+    color: white;
+}
+body, html {
+    margin: 0;
+    padding: 0;
+    padding-bottom: 2em;
+    min-height: 100vh;
+    
+
+    background: #e52d27;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top right, #b31217, #e52d27);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top right, #b31217, #e52d27); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-repeat: none;
+    background-size: cover;
+
+    font-family: 'Roboto';
+    color: white;
+}
+
+#app {
+    margin-top: 2em;
+    #overflow: scroll;
+}
+
+hgroup {
+    padding: 1em;
+}
+hgroup h1 {
+    font-size: 4.5em;
+    margin-bottom:0.25em;
+}
+form {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+form input {
+    flex: 8;
+    padding-right: 1em;
+}
+form button {
+    flex: 2;
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+}
+
+
+.card-container {
+    display: flex;
+    flex-flow: row wrap;
+}
+.teacher-card {
+    flex: 100%;
+}
+.visible-card {
+    min-height: 10vh;
+    margin-bottom: 1em;
+
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: center;
+
+    background: rgba(255,255,255,0.05);
+    box-shadow: 10px 10px 10px rgba(0,0,0,0.1);
+
+    transition: all ease 0.3s;
+
+}
+.visible-card:hover {
+    cursor: pointer;
+}
+.visible-card:focus, .visible-card:hover{
+    transform: scale(1.05);
+    background: white;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top right, white, #cfcfcf);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top right, white, #cfcfcf); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    color: #333;
+}
+
+.modal {
+    color: black;
+}
+
+.ta {
+    color: red;
+    font-size: 0.75em;
+}
+.ta-white {
+    color: lightgrey;
+    font-size: 0.75em;
+}

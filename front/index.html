@@ -4,34 +4,43 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Office Hours App</title>
+  <title>DawgHours</title>
 
+  <link rel="icon" href="./favicon.ico" type="image/ico">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <link rel="stylesheet" href="./style.css" type="text/css">
 </head>
 <body>
 
 
   <div class="container" id="app">
-    <h1 class="text-center">Office Hours App</h1>
-    
-    <input type="text" name="name" id="input-name">
-    <button id="button-submit">Search</button>
-    <button id="button-clear">Clear</button>
-
+    <hgroup>
+      <h1 class="text-center">DawgHours</h1>
+      <form class="form-inline container-fluid">
+	<input type="text" class="form-control" id="input-name" placeholder="Professor Name" v-model="filterText" @input="filter()">
+     
+      
+	<!--<button type="button" class="btn btn-primary" id="button-submit">Search</button>
+	<button type="button" class="btn btn-secondary" id="button-clear">See All</button>-->
+     </form> 
+    </hgroup>
     <hr>
 
-    <ul>
-      <li v-for="t in teacherData">
-	<a href="#" @click="showData(t)">{{t.name}}</a>
+    <div class="card-container">
+      <div class="teacher-card" v-for="t,index in visibleData" :id="'teacher-card-' + index">
+	<div class="visible-card" @click="showModal(index)">
+	  <h2 class="text-center">{{t.name}} <span v-if="t.isProf != 1" class="ta-white">(TA)</span></h2>
+	</div>
 	<!-- MODAL -->
-	<div class="modal" tabindex="-1" role="dialog":id="'modal-' + t.name">
+	<div class="modal" tabindex="-1" role="dialog" :id="'modal-' + index">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <!-- MODAL HEADER -->
 	      <div class="modal-header">
-		<h5 class="modal-title">{{t.name}}</h5>
-		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		<h3 class="modal-title">{{t.name}} <span v-if="t.isProf != 1" class="ta">(TA)</span></h3>
+		<button type="button" class="close" @click="closeModal(index)" data-dismiss="modal" aria-label="Close">
 		  <span aria-hidden="true">&times;</span>
 		</button>
 	      </div>
@@ -39,10 +48,10 @@
 	      <div class="modal-body">
 
 		<div v-for="oh in t.officeHours" class="container">
-		  <h4>{{oh.course.title}} <span class="text-muted">{{oh.course.prefix}} {{oh.course.courseNumber}}</span></h4>
+		  <h4>{{oh.course.prefix}} {{oh.course.courseNumber}} <span class="text-muted">{{oh.course.title}}</span></h4>
 		  <p><b>Times:</b> {{oh.availability.times}}</p>
-		  <p><b>Location:</b> {{oh.availability.building}} {{oh.availability.room}}</p>
-		  <p><b>Can Schedule by Appointment?:</b> <span v-if="oh.availability.byAppt">Yes</span> <span v-else>No</span></p>
+		  <p><b>Location:</b> <a :href="buildMapsLink(oh.availability.building)" :id="'maps-link-' + index" target="_blank">{{oh.availability.building}} {{oh.availability.room}}</a></p>
+		  <p><b>Must Schedule by Appointment:</b> <span v-if="oh.availability.byAppt">Yes</span> <span v-else>No</span></p>
 		  <p v-if="oh.availability.specialNote"><b>Special Note:</b> {{oh.availability.specialNote}}</p>
 		  
 		</div>
@@ -52,14 +61,15 @@
 	      </div>
 	      <!-- MODAL FOOTER -->
 	      <div class="modal-footer">
-		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		<button type="button" class="btn btn-secondary" data-dismiss="modal" @click="closeModal(index)">Close</button>
 	      </div>
 	    </div>
 	  </div>
 	</div>
-	
-      </li>
-    </ul>
+
+      </div> <!-- Card Container -->
+      
+    </div>
     
   </div>
 
