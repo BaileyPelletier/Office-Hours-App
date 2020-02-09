@@ -6,7 +6,7 @@ let vm = new Vue({
 	filterText: ""
     },
     created (){
-	$.getJSON("http://35.245.72.191/app1", (data) => {
+	$.getJSON("http://35.245.72.191/app1?callback=", (data) => {
 	    this.teacherData = data;
 	    this.visibleData = this.teacherData;
 	}).fail(() => {

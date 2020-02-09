@@ -140,7 +140,7 @@ class Teacher {
 
 int main(void) {
 
-  Teacher a(1, "Michael Cotterel");
+  Teacher a(1, "Michael Cotterell");
   Teacher b(1, "Brad Barnes");
   Teacher c(1, "Michael Scott");
   Teacher d(1, "Hao Peng");
@@ -165,7 +165,7 @@ int main(void) {
   Availability two;
   two.set("Tue, Thu: 1pm-2pm","Boyd Graduate Studies", "101",1,"First Thursday each month");
   Availability three;
-  three.set("Wed, Fri:: 10am-12pm","Boyd Graduate Studies", "202",0,"");
+  three.set("Wed, Fri: 10am-12pm","Boyd Graduate Studies", "202",0,"");
   Availability four;
   four.set("Mon: 4pm-6pm","Science Learning Center", "340",0,"Only before exams");
   Availability five;
