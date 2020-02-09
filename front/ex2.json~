@@ -1,0 +1,70 @@
+[
+    {
+	"name" : "Jere",
+	"isProf" : true,
+	"officeHours" : [
+	    {
+		"course" : {
+		    "prefix" : "CSCI",
+		    "courseNumber" : 1301,
+		    "title" : "Java 1"
+		},
+		"availability" : {
+		    "times" : "MW: 10am-12am",
+		    "building": "Boyd",
+		    "room": "110",
+		    "byAppt" : true,
+		    "specialNote" : ""
+		}
+	    },
+	    {
+		"course" : {
+		    "prefix" : "EMST",
+		    "courseNumber" : 4005,
+		    "title" : "Movie Analysis"
+		},
+		"availability" : {
+		    "times" : "Tu W: 9am-11am",
+		    "building": "Journalism",
+		    "room": "412",
+		    "byAppt" : false,
+		    "specialNote" : "Unavailable every 3rd Wednesday of the month"
+		}
+	    },
+	]
+    },
+    {
+	"name" : "Mary",
+	"isProf" : false,
+	"officeHours" : [
+	    {
+		"course" : {
+		    "prefix" : "MIST",
+		    "courseNumber" : 1420,
+		    "title" : "Intro to IT"
+		},
+		"availability" : {
+		    "times" : "W F: 10am-12pm",
+		    "building": "Carrel Hall",
+		    "room": "102",
+		    "byAppt" : true,
+		    "specialNote" : ""
+		}
+	    },
+	    {
+		"course" : {
+		    "prefix" : "EMST",
+		    "courseNumber" : 3150,
+		    "title" : "Industries"
+		},
+		"availability" : {
+		    "times" : "M Th: 9am-11am",
+		    "building": "Journalism",
+		    "room": "502",
+		    "byAppt" : true,
+		    "specialNote" : "Willing to meet Friday morning, only by appointment"
+		}
+	    },
+	]
+    }
+]

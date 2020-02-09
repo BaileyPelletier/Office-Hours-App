@@ -1,0 +1,22 @@
+[
+    {
+	"name" : "Jere",
+	"isProf" : true,
+	"officeHours" : [
+	    {
+		"course" : {
+		    "prefix" : "CSCI",
+		    "courseNumber" : 1301,
+		    "title" : "Java 1"
+		},
+		"availability" : {
+		    "times" : "MW: 10am-12am",
+		    "building": "Boyd",
+		    "room": "110",
+		    "byAppt" : true,
+		    "specialNote" : ""
+		}
+	    }
+	]
+    }
+]
