@@ -54,20 +54,13 @@ class Availability {
     building = "";
     byApp = 0;
   }
-  void set(string b, string n) {
+  void set(string s, string b, string n, int m, string z) {
+    times = s;
     building = b;
     roomNum = n;
-    byApp = 0;
+    byApp = m;
+    special = z;
   } //constructor
-  void addTimes(string s) {
-    times = s;
-  } //addTimes
-  void setApp(int a) {
-    byApp = a;
-  } //setApp
-  void comment(string s) {
-    special = s;
-  } //comment
   string getTimes() {
     return times;
   } //getTimes
@@ -96,11 +89,11 @@ public:
   Availability avblty;
   OfficeHours() {
     crs.set("A",0,"A");
-    avblty.set("A","0");
+    avblty.set("A","A","0",0,"A");
   }
   void set(Course &c, Availability &a) {
     crs.set(c.getPrefix(),c.getCourseNum(),c.getTitle());
-    avblty.set(a.getBuilding(),a.getRoomNum());
+    avblty.set(a.getTimes(),a.getBuilding(),a.getRoomNum(),a.getByApp(),a.getSpecial());
   } //constructor
   string toJSON() {
     return "{\"course\":" + crs.toJSON() + ",\"availability\":" + avblty.toJSON() +"}";
@@ -150,40 +143,36 @@ int main(void) {
   Teacher a(1, "Michael Cotterel");
   Teacher b(1, "Brad Barnes");
   Teacher c(1, "Michael Scott");
-  Teacher teachers[3] = {a,b,c};
+  Teacher d(1, "Hao Peng");
+  Teacher e(0, "John Smith");
+  Teacher f(0, "Erin Jones");
+  Teacher g(1, "Bill Hollingsworth");
+  
 
   Course csci1301;
-  csci1301.set("CSCI", 1301, "Java I");
+  csci1301.set("CSCI", 1301, "Intro to Computing");
   Course csci1302;
-  csci1302.set("CSCI", 1302, "Java II");
-  Course csci2610;
-  csci2610.set("CSCI", 2610, "Systems Programming");
+  csci1302.set("CSCI", 1302, "Software Development");
+  Course csci1730;
+  csci1730.set("CSCI", 1730, "Systems Programming");
   Course csci3030;
-  csci3030.set("CSCI", 3030, "Computer Ethics");
+  csci3030.set("CSCI", 3030, "Computing, Ethics, and Society");
+  Course csci2610;
+  csci2610.set("CSCI",2610,"Discrete Mathematics");
 
-  cout << csci1301.getPrefix() << csci1301.getCourseNum() << csci1301.getTitle();
-  
   Availability one;
-  one.set("Boyd", "101");
-  one.addTimes("MWF: 12-3");
+  one.set("Mon, Wed, Fri: 12pm-3pm", "Boyd Graduate Studies", "101", 0, "");
   Availability two;
-  two.set("Boyd", "101");
-  two.addTimes("TR: 1-2");
-  two.setApp(1);
+  two.set("Tue, Thu: 1pm-2pm","Boyd Graduate Studies", "101",1,"First Thursday each month");
   Availability three;
-  three.set("Boyd", "202");
-  three.addTimes("WF: 10-12");
+  three.set("Wed, Fri:: 10am-12pm","Boyd Graduate Studies", "202",0,"");
   Availability four;
-  four.set("SLC", "340");
-  four.addTimes("M: 4-6");
+  four.set("Mon: 4pm-6pm","Science Learning Center", "340",0,"Only before exams");
   Availability five;
-  five.set("Main Library", "300");
-  five.addTimes("TWR: 1-3");
+  five.set("Tue, Wed, Thu: 1pm-3pm","Main Library", "300",0,"");
   Availability six;
-  six.set("Gilbert", "220");
-  six.addTimes("F: 4-5");
-  six.setApp(1);
-
+  six.set("Fri: 4pm-5pm","Gilbert Hall", "220",1,"");
+  
   OfficeHours a1;
   a1.set(csci1301, one);
   OfficeHours a2;
@@ -197,17 +186,22 @@ int main(void) {
   OfficeHours c2;
   c2.set(csci3030, six);
 
-  cout << a1.crs.getTitle();
-  
   a.addOH(0, a1);
-  cout << a1.crs.toJSON();
-  cout << a1.avblty.toJSON();
   a.addOH(1, a2);
   b.addOH(0, b1);
   b.addOH(1, b2);
   c.addOH(0, c1);
   c.addOH(1, c2);
+  d.addOH(0, a1);
+  d.addOH(1, b2);
+  e.addOH(0, a2);
+  e.addOH(1, c2);
+  f.addOH(0, c2);
+  f.addOH(1, c1);
+  g.addOH(0, b2);
+  g.addOH(1, b1);
 
+  Teacher teachers[7] = {b,a,g,d,c,e,f};
   
     // Backup the stdio streambufs
     streambuf * cin_streambuf  = cin.rdbuf();
@@ -230,9 +224,9 @@ int main(void) {
 
         cout << "Content-type: application/json\r\n"
              << "\r\n[";
-	for (int i=0; i<3; i++) {
+	for (int i=0; i<7; i++) {
 	  cout << teachers[i].toJSON();
-	  if(i!=2) {
+	  if(i!=6) {
 	    cout << ",";
 	  } //if
 	} //for
